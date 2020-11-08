@@ -11,6 +11,54 @@ filePath: str = "none"
 outputPath: str = "none"
 
 
+# Windows
+def licenseWindow():
+    licenseW = Tk()
+    licenseW.title("GBuild v" + version + " | License")
+    #about.geometry("")
+    text = Label(licenseW, text="""MIT License
+
+Copyright (c) 2020 Mykola Malyovaniy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.""")
+    text.pack(side="left", anchor=N)
+    licenseW.mainloop()
+
+
+def aboutWindow():
+    about = Tk()
+    about.title("GBuild v" + version + " | About")
+    about.geometry("300x100")
+    about.resizable(0, 0)
+    textFrame = Frame(about)
+    textFrame.pack(side="top", anchor=N)
+    aboutLabel = Label(textFrame, text="GBuild - GCC GUI to build C/C++ programs. ")
+    aboutLabel.pack(side="top", anchor=N)
+    aboutButtonsFrame = Frame(about, padx="5", pady="2")
+    aboutButtonsFrame.pack(side="bottom", anchor=S)
+    licenseButton = Button(aboutButtonsFrame, width=10, text="License", command=licenseWindow)
+    licenseButton.pack(side="left", anchor=SW)
+    creditLabel = Label(aboutButtonsFrame, text="Copyright (c) 2020 Mykola Malyovaniy")
+    creditLabel.pack(side="right", anchor=SE)
+    about.mainloop()
+
+
 # Functions
 def chooseCompiler():  # Calls file dialog and saves to ccevar
     global compilerPath
@@ -99,20 +147,6 @@ buttonsFrame = Frame(root)
 buttonsFrame.pack(side="bottom", anchor=S, padx="5", pady="2")
 compileButton = Button(buttonsFrame, width="7", text="Compile", command=compileFile, pady="1")
 compileButton.pack(side="left")
-
-
-def aboutWindow():
-    about = Tk()
-    about.title("GBuild v" + version + " | About")
-    about.geometry("300x100")
-    about.resizable(0, 0)
-    aboutLabel = Label(about,
-                       text="GBuild - GCC GUI to build C/C++ programs.\nMade by 3pixl.\nSource edited by " + editor +
-                            ".\nYou can help me by committing your own versions.")
-    aboutLabel.pack()
-    about.mainloop()
-
-
 aboutButton = Button(buttonsFrame, width="7", text="About", command=aboutWindow, pady="1")
 aboutButton.pack(side="right")
 # End buttons frame
