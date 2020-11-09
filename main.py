@@ -116,6 +116,10 @@ def compileFile():  # Compiles file
                                                                  "parameters.")
 
 
+def exitApp():
+    sys.exit(0)
+
+
 root = Tk()  # Window create
 # Window Initialization
 root.title("GBuild")  # Window title
@@ -187,9 +191,14 @@ outputPathLabel.pack(side="top", anchor=SW)
 # Buttons frame
 buttonsFrame = Frame(root)
 buttonsFrame.pack(side="bottom", anchor=S, padx="5", pady="2")
+
 compileButton = Button(buttonsFrame, width="7", text="Compile", command=compileFile, pady="1")
-compileButton.pack(side="left")
+compileButton.pack(side="left", anchor=SW)
+
 aboutButton = Button(buttonsFrame, width="7", text="About", command=aboutWindow, pady="1")
-aboutButton.pack(side="right")
+aboutButton.pack(side="right", anchor=SE)
+
+exitButton = Button(buttonsFrame, width="7", text="Exit", command=exitApp, pady="1")
+exitButton.pack(side="right", anchor=SE)
 # End buttons frame
 root.mainloop()  # Show the window
