@@ -101,6 +101,11 @@ def chooseOutputFolder():  # Calls folder dialog and saves to outputPath
     print(outputSet)
 
 
+def setParams():
+    global params
+    params = argsVar.get()
+
+
 def compileFile():  # Compiles file
     if compilerSet and fileSet and outputSet is True:
         state = os.system(compilerPath + " " + filePath + " -o " + outputPath + "/app " + params)
@@ -114,7 +119,7 @@ def compileFile():  # Compiles file
 root = Tk()  # Window create
 # Window Initialization
 root.title("GBuild")  # Window title
-root.geometry("245x300")  # Window resolution
+root.geometry(mainWindowSize)  # Window resolution
 root.resizable(0, 0)  # Set no resizing window
 # Window init end
 
@@ -155,6 +160,8 @@ argsEntry = Entry(argsFrame, width="27", textvariable=argsVar)
 argsVar.set("")
 params = argsVar.get()
 argsEntry.pack(side="left")
+setParamsButton = Button(argsFrame, width="7", text="Set", command=setParams)
+setParamsButton.pack(side="left")
 # End arguments frame
 
 # Info frame
