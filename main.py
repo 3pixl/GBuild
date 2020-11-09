@@ -9,13 +9,18 @@ from config import *  # Version, author etc.
 compilerPath: str = "none"
 filePath: str = "none"
 outputPath: str = "none"
+params: str = "none"
+
+compilerSet: bool = False
+fileSet: bool = False
+outputSet: bool = False
 
 
 # Windows
 def licenseWindow():
     licenseW = Tk()
     licenseW.title("GBuild v" + version + " | License")
-    #about.geometry("")
+    licenseW.resizable(0, 0)
     text = Label(licenseW, text="""MIT License
 
 Copyright (c) 2020 Mykola Malyovaniy
@@ -60,28 +65,48 @@ def aboutWindow():
 
 
 # Functions
-def chooseCompiler():  # Calls file dialog and saves to ccevar
+def chooseCompiler():  # Calls file dialog and saves to compilerPath
     global compilerPath
+    global compilerSet
     compilerPath = fd.askopenfilename(filetypes=(("GNU C Compiler", "gcc.exe"),
                                                  ("GNU C++ Compiler", "g++.exe"),
                                                  ("All files (Linux)", "*.*")))
+    compilerVar.set("Compiler: " + compilerPath)
+    compilerPathLabel.config(bg="green")
+    compilerSet = True
+    print(compilerSet)
 
 
-def chooseFile():  # Same as chooseCompiler but saves to cfevar
+def chooseFile():  # Same as chooseCompiler but saves to filePath
     global filePath
+    global fileSet
     filePath = fd.askopenfilename(filetypes=(("C source code", "*.c"),
-                                             ("C++ source code", ("*.cpp", "*.cc", "*.C", "*.cxx", "*.c++")),
-                                             ("All files", "*.*")))
+                                              ("C++ source code", ("*.cpp", "*.cc", "*.C", "*.cxx", "*.c++"))),
+                                  initialdir="/")
+    fileVar.set("Source files: " + filePath)
+    filePathLabel.config(bg="green")
+    fileSet = True
+    print(fileSet)
 
 
-def chooseOutputFolder():
+def chooseOutputFolder():  # Calls folder dialog and saves to outputPath
     global outputPath
+    global outputSet
     outputPath = fd.askdirectory()
+    outputVar.set("Output path: " + outputPath)
+    outputPathLabel.config(bg="green")
+    outputSet = True
+    print(outputSet)
 
 
 def compileFile():  # Compiles file
-    os.system(compilerPath + " " + filePath + " -o " + outputPath + "/app")
-    messagebox.showinfo(title="Compilation info", message="Compiled!\nCheck " + outputPath + "/ for your file.")
+    if compilerSet and fileSet and outputSet is True:
+        state = os.system(compilerPath + " " + filePath + " -o " + outputPath + "/app " + params)
+        print(state)
+        messagebox.showinfo(title="Compilation info", message="Compiled!\nCheck " + outputPath + "/ for your file.")
+    else:
+        messagebox.showerror(title="Specify parameters", message="One or more parameters are not set.\nPlease specify "
+                                                                 "parameters.")
 
 
 root = Tk()  # Window create
@@ -123,23 +148,31 @@ argsFrame = Frame(root)
 argsFrame.pack(side="top", anchor=W, padx="5", pady="2")
 argsLabel = Label(argsFrame, text="Arguments:")
 argsLabel.pack(side="left")
-argsEntry = Entry(argsFrame, width="27")
+argsVar = StringVar()
+argsEntry = Entry(argsFrame, width="27", textvariable=argsVar)
+argsVar.set("")
+params = argsVar.get()
 argsEntry.pack(side="left")
 # End arguments frame
 
-# TODO: Info frame
-# infoFrame = Frame(root)
-# infoFrame.pack(side="top", anchor=W, padx="5", pady="2")
-#
-# compilerVar = StringVar()
-# compilerPath = Label(infoFrame, textvariable=compilerVar)
-# compilerVar.set("Compiler: " + ccevar)
-# compilerPath.pack(side="top", anchor=NW)
-#
-# fileVar = StringVar()
-# filePath = Label(infoFrame, textvariable=fileVar)
-# fileVar.set("Main source file: " + cfevar)
-# filePath.pack(side="bottom", anchor=SW)
+# Info frame
+infoFrame = Frame(root)
+infoFrame.pack(side="top", anchor=W, padx="5", pady="2")
+
+compilerVar = StringVar()
+compilerPathLabel = Label(infoFrame, textvariable=compilerVar, bg="red", fg="white")
+compilerVar.set("Compiler: " + compilerPath)
+compilerPathLabel.pack(side="top", anchor=NW)
+
+fileVar = StringVar()
+filePathLabel = Label(infoFrame, textvariable=fileVar, bg="red", fg="white")
+fileVar.set("Source file: " + filePath)
+filePathLabel.pack(side="top", anchor=W)
+
+outputVar = StringVar()
+outputPathLabel = Label(infoFrame, textvariable=outputVar, bg="red", fg="white")
+outputVar.set("Output path: " + outputPath)
+outputPathLabel.pack(side="top", anchor=SW)
 # End info frame
 
 # Buttons frame
