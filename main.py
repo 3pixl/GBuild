@@ -19,7 +19,7 @@ outputSet: bool = False
 # Windows
 def licenseWindow():
     licenseW = Tk()
-    licenseW.title("GBuild v" + version + " | License")
+    licenseW.title("GBuild | License")
     licenseW.resizable(0, 0)
     text = Label(licenseW, text="""MIT License
 
@@ -48,13 +48,15 @@ SOFTWARE.""")
 
 def aboutWindow():
     about = Tk()
-    about.title("GBuild v" + version + " | About")
-    about.geometry("300x100")
+    about.title("GBuild | About")
+    about.geometry("320x100")
     about.resizable(0, 0)
     textFrame = Frame(about)
     textFrame.pack(side="top", anchor=N)
-    aboutLabel = Label(textFrame, text="GBuild - GCC GUI to build C/C++ programs. ")
+    aboutLabel = Label(textFrame, text="GBuild - GCC GUI to build C/C++ programs.")
     aboutLabel.pack(side="top", anchor=N)
+    verLabel = Label(textFrame, text="Version: " + version)
+    verLabel.pack(side="top", anchor=S)
     aboutButtonsFrame = Frame(about, padx="5", pady="2")
     aboutButtonsFrame.pack(side="bottom", anchor=S)
     licenseButton = Button(aboutButtonsFrame, width=10, text="License", command=licenseWindow)
@@ -111,7 +113,7 @@ def compileFile():  # Compiles file
 
 root = Tk()  # Window create
 # Window Initialization
-root.title("GBuild v" + version)  # Window title
+root.title("GBuild")  # Window title
 root.geometry("245x300")  # Window resolution
 root.resizable(0, 0)  # Set no resizing window
 # Window init end
@@ -137,7 +139,7 @@ chooseFileDialog.pack(side="left")
 # Output folder frame
 outputFolderFrame = Frame(root)
 outputFolderFrame.pack(side="top", anchor=W, padx="5", pady="2")
-outputFolderLabel = Label(outputFolderFrame, text="Output folder: ")
+outputFolderLabel = Label(outputFolderFrame, text="Output folder:")
 outputFolderLabel.pack(side="left")
 chooseFolderDialog = Button(outputFolderFrame, width="10", text="Select", command=chooseOutputFolder)
 chooseFolderDialog.pack(side="left")
