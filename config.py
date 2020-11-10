@@ -1,3 +1,3 @@
-version: str = "1.1-dev"
+version: str = "1.1"
 editor: str = "no one"
 mainWindowSize: str = "310x300"
