@@ -32,8 +32,8 @@ To build GBuild, you need **Python 3.9** and **PyInstaller** (`python -m pip ins
 
 After that, run this in folder with code:<br>
 `pyinstaller -F -n GBuild --noconsole main.py`<br>
-`-F` to bundle the app in one file;
-`-n GBuild` to name output file "GBuild"
+`-F` to bundle the app in one file;<br>
+`-n GBuild` to name output file "GBuild";<br>
 `--noconsole` to make app launch without console pop-up
 
 Congrats! you've built GBuild.
