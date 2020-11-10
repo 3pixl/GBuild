@@ -76,7 +76,6 @@ def chooseCompiler():  # Calls file dialog and saves to compilerPath
     compilerVar.set("Compiler: " + compilerPath)
     compilerPathLabel.config(bg="green")
     compilerSet = True
-    print(compilerSet)
 
 
 def chooseFile():  # Same as chooseCompiler but saves to filePath
@@ -88,7 +87,6 @@ def chooseFile():  # Same as chooseCompiler but saves to filePath
     fileVar.set("Source files: " + filePath)
     filePathLabel.config(bg="green")
     fileSet = True
-    print(fileSet)
 
 
 def chooseOutputFolder():  # Calls folder dialog and saves to outputPath
@@ -98,7 +96,6 @@ def chooseOutputFolder():  # Calls folder dialog and saves to outputPath
     outputVar.set("Output path: " + outputPath)
     outputPathLabel.config(bg="green")
     outputSet = True
-    print(outputSet)
 
 
 def setParams():
