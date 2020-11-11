@@ -1,7 +1,5 @@
 # GBuild
 GBuild is a GUI application to build C/C++ apps with GCC easily without command-line trash.
-
-Note: arguments are not working now, in further commits they will work.
 ## Benefits of GBuild
 GBuild is made for non-experienced C/C++ programmers, so they can build their first apps with ease. Of course, they can
 just install an IDE like Visual Studio or CodeBlocks, but IDEs are very heavy and big, while GBuild is small and
